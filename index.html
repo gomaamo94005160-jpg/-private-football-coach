@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>"Private Football Coach" | الكابتن جمعة</title>
+    <title>"Private Football Coach" | Coach gomaa </title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
@@ -21,10 +21,16 @@
             const [isLoggedOut, setIsLoggedOut] = React.useState(false);
             const [showBookingModal, setShowBookingModal] = React.useState(false);
             const [selectedProgram, setSelectedProgram] = React.useState("حصة تدريبية خاصة");
+            const [selectedPackage, setSelectedPackage] = React.useState("الحصة المفردة");
+            const [clientField, setClientField] = React.useState("أقرب ملعب / الملعب المفضل");
+            
+            const [playerAge, setPlayerAge] = React.useState(12);
+            const [rating, setRating] = React.useState(5);
+            const [ratedSubmitted, setRatedSubmitted] = React.useState(false);
 
             const handleWhatsApp = (country) => {
                 const phoneNumber = country === 'egypt' ? "201015976474" : "966597187037";
-                const message = encodeURIComponent(`مرحباً كابتن جمعة، أرغب في حجز (${selectedProgram})في اقرب ملعب .`);
+                const message = encodeURIComponent(`مرحباً كابتن جمعة، أرغب في حجز (${selectedProgram}) - الباقة: (${selectedPackage}) - موقع التدريب: (${clientField}) مع قياس أداء Polar.`);
                 window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
             };
 
@@ -39,13 +45,19 @@
                 }
             };
 
+            const getAgeCategory = (age) => {
+                if (age <= 8) return "فئة الناشئين الصغار (أساسيات الكرة والتحكم)";
+                if (age <= 12) return "فئة الواعدين (تطوير المهارات والتوافق العضلي)";
+                return "فئة الشباب والمحترفين (التكتيك والسرعة والتحمل البدني)";
+            };
+
             if (isLoggedOut) {
                 return (
                     <div className="min-h-screen bg-[#113823] text-white flex flex-col items-center justify-center p-6 text-center">
                         <div className="bg-[#184d31] border border-emerald-500/30 p-8 rounded-3xl max-w-sm w-full space-y-5 shadow-2xl">
                             <div className="text-5xl">⚽</div>
                             <h2 className="text-xl font-bold text-[#c7f94b]">تم تسجيل الخروج بنجاح</h2>
-                            <p className="text-sm text-emerald-100/80">شكراً لزيارتك "Private Football Coach" مع الكابتن جمعة - .</p>
+                            <p className="text-sm text-emerald-100/80">شكراً لزيارتك "Private Football Coach" مع Coach gomaa.</p>
                             <button 
                                 onClick={() => setIsLoggedOut(false)} 
                                 className="w-full bg-[#c7f94b] hover:bg-[#b5eb34] text-[#0f331f] font-bold py-3 px-6 rounded-full text-sm transition shadow-lg"
@@ -65,8 +77,8 @@
                         <div className="flex items-center gap-2">
                             <span className="text-xl">⚽</span>
                             <div>
-                                <h1 className="text-sm font-bold leading-tight">"Private Football Coach"</h1>
-                                <p className="text-[10px] text-[#c7f94b]">الكابتن جمعة | </p>
+                                <h1 className="text-sm font-bold leading-tight""">"Private Football Coach"</h1>
+                                <p className="text-[10px] text-[#c7f94b]">Coach gomaa| تدريب فردي ومجموعات</p>
                             </div>
                         </div>
                         <div className="flex items-center gap-2">
@@ -86,15 +98,14 @@
                         </div>
                     </header>
 
-                    {/* القسم الرئيسي (Hero) بنفس التصميم الأخضر وتخطيط الملعب */}
+                    {/* القسم الرئيسي */}
                     <section className="bg-gradient-to-b from-[#164a2e] to-[#1e633e] text-white px-6 pt-8 pb-10 relative overflow-hidden">
-                        {/* خطوط الملعب التجميلية في الخلفية */}
                         <div className="w-64 h-64 rounded-full border border-white/10 absolute -left-24 top-16 pointer-events-none"></div>
                         <div className="w-full h-[1px] bg-white/10 absolute left-0 top-48 pointer-events-none"></div>
 
                         <div className="relative z-10 space-y-5">
                             <div className="inline-block bg-white/10 backdrop-blur-sm border border-white/15 px-3.5 py-1 rounded-full text-xs text-emerald-100">
-                                تدريب فردي • مجموعات صغيرة
+                                تدريب فردي مع قياسات أداء احترافية 📈
                             </div>
 
                             <h2 className="text-4xl font-black leading-tight tracking-tight">
@@ -103,10 +114,9 @@
                             </h2>
 
                             <p className="text-sm text-emerald-50/90 leading-relaxed">
-                                حصص تدريب خاصة مصمّمة حسب عمرك ومستواك وهدفك — مهارى وبدنى وخططى للوصول للفورمة الرياضية.
+                                حصص تدريب خاصة مصمّمة حسب عمرك ومستواك وهدفك — في أقرب ملعب لك مع أحدث أجهزة قياس الأداء البدني.
                             </p>
 
-                            {/* الأزرار الرئيسية */}
                             <div className="flex items-center gap-3 pt-2">
                                 <button 
                                     onClick={() => openBooking("حصتك التدريبية الأولى")}
@@ -122,15 +132,14 @@
                                 </a>
                             </div>
 
-                            {/* الإحصائيات السفلية */}
                             <div className="grid grid-cols-3 gap-2 pt-6 border-t border-white/15 text-center">
                                 <div>
                                     <div className="text-2xl font-black text-[#c7f94b]">1:1</div>
                                     <div className="text-[11px] text-emerald-100/80 mt-0.5">اهتمام كامل</div>
                                 </div>
                                 <div>
-                                    <div className="text-2xl font-black text-[#c7f94b]">6+</div>
-                                    <div className="text-[11px] text-emerald-100/80 mt-0.5">سنوات وما فوق</div>
+                                    <div className="text-2xl font-black text-[#c7f94b]">Polar</div>
+                                    <div className="text-[11px] text-emerald-100/80 mt-0.5">قياس نبض وطاقة</div>
                                 </div>
                                 <div>
                                     <div className="text-2xl font-black text-[#c7f94b]">60</div>
@@ -140,67 +149,102 @@
                         </div>
                     </section>
 
-                    {/* قسم البرامج التدريبية */}
-                    <section id="programs" className="px-5 py-8 space-y-5 bg-slate-50">
+                    {/* قسم أجهزة بولر */}
+                    <section className="px-5 py-6 bg-emerald-950 text-white space-y-4">
+                        <div className="flex items-center gap-3">
+                            <div className="w-10 h-10 rounded-xl bg-emerald-800 flex items-center justify-center text-xl text-[#c7f94b]">📊</div>
+                            <div>
+                                <h3 className="font-bold text-sm text-[#c7f94b]">قياس الأداء الرياضي بأجهزة Polar</h3>
+                                <p className="text-[10px] text-emerald-200">متابعة دقيقة لمعدلات ضربات القلب وجهد اللاعب أثناء التدريب</p>
+                            </div>
+                        </div>
+                        <div className="grid grid-cols-2 gap-2 text-xs">
+                            <div className="bg-emerald-900/60 p-3 rounded-xl border border-emerald-800 space-y-1">
+                                <span className="font-bold text-white block">❤️ مستشعر Polar H10</span>
+                                <p className="text-[10px] text-emerald-300">مراقبة دقيقة لمعدل ضربات القلب والجهد البدني والتحمل اللاهوائي.</p>
+                            </div>
+                            <div className="bg-emerald-900/60 p-3 rounded-xl border border-emerald-800 space-y-1">
+                                <span className="font-bold text-white block">📈 تقارير وتيليمتري</span>
+                                <p className="text-[10px] text-emerald-300">تحليل استهلاك الطاقة ومقارنة تطور اللياقة عبر تطبيق Polar Flow.</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* الحاسبة التفاعلية لعمر الفئة المستهدفة */}
+                    <section className="px-5 py-6 bg-slate-100 space-y-3 border-b border-slate-200">
+                        <div className="flex justify-between items-center">
+                            <h3 className="text-xs font-bold text-slate-700">🎯 حدد عمر اللاعب لمعرفة برنامجه المناسب:</h3>
+                            <span className="text-xs font-black text-[#164a2e] bg-emerald-100 px-2.5 py-1 rounded-full">{playerAge} سنة</span>
+                        </div>
+                        <input 
+                            type="range" 
+                            min="6" 
+                            max="18" 
+                            value={playerAge} 
+                            onChange={(e) => setPlayerAge(Number(e.target.value))}
+                            className="w-full accent-[#164a2e] cursor-pointer"
+                        />
+                        <div className="bg-white p-3 rounded-xl border border-slate-200 text-center space-y-1 shadow-xs">
+                            <p className="text-xs font-bold text-[#164a2e]">{getAgeCategory(playerAge)}</p>
+                            <p className="text-[10px] text-slate-500">تمارين مخصصة لرفع الكفاءة الفنية والبدنية لهذه المرحلة.</p>
+                        </div>
+                    </section>
+
+                    {/* البرامج التدريبية */}
+                    <section id="programs" className="px-5 py-8 space-y-4 bg-white">
                         <div className="text-center space-y-1">
                             <h3 className="text-2xl font-black text-slate-900">البرامج التدريبية</h3>
-                            <p className="text-xs text-slate-500">اختر البرنامج الأنسب لك، أو دعنا نساعدك في الاختيار.</p>
+                            <p className="text-xs text-slate-500">اختر البرنامج الأنسب لك في أقرب ملعب.</p>
                         </div>
 
                         <div className="space-y-3">
-                            {/* برنامج 1 */}
-                            <div className="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-sm flex items-center justify-between">
+                            <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200 flex items-center justify-between">
                                 <div className="space-y-1">
-                                    <span className="text-[10px] font-bold bg-emerald-100 text-emerald-800 px-2.5 py-0.5 rounded-full">الأكثر طلباً</span>
+                                    <span className="text-[10px] font-bold bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full">مهاري + Polar</span>
                                     <h4 className="font-bold text-slate-900 text-sm">التحكم بالكرة والمراوغة</h4>
-                                    <p className="text-[11px] text-slate-500">تطوير اللمسة الأولى، المراوغة في المساحات الضيقة، والتمرير الدقيق.</p>
+                                    <p className="text-[11px] text-slate-500">اللمسة الأولى والمراوغة تحت الضغط البدني.</p>
                                 </div>
-                                <button 
-                                    onClick={() => openBooking("برنامج التحكم بالكرة والمراوغة")}
-                                    className="bg-[#164a2e] text-white text-xs font-bold px-3.5 py-2 rounded-xl shrink-0 mr-3 hover:bg-[#1e633e]"
-                                >
-                                    احجز
-                                </button>
+                                <button onClick={() => openBooking("برنامج التحكم بالكرة والمراوغة")} className="bg-[#164a2e] text-white text-xs font-bold px-3.5 py-2 rounded-xl shrink-0 mr-3">احجز</button>
                             </div>
 
-                            {/* برنامج 2 */}
-                            <div className="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-sm flex items-center justify-between">
+                            <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200 flex items-center justify-between">
                                 <div className="space-y-1">
-                                    <span className="text-[10px] font-bold bg-lime-100 text-lime-800 px-2.5 py-0.5 rounded-full">بدني ومهاري</span>
+                                    <span className="text-[10px] font-bold bg-lime-100 text-lime-800 px-2.5 py-0.5 rounded-full">بدني وسرعة</span>
                                     <h4 className="font-bold text-slate-900 text-sm">السرعة والرشاقة والتسديد</h4>
-                                    <p className="text-[11px] text-slate-500">رفع السرعة الانفجارية، التوازن، ودقة وقوة التسديد على المرمى.</p>
+                                    <p className="text-[11px] text-slate-500">تطوير الانفجار العضلي ودقة التسديد.</p>
                                 </div>
-                                <button 
-                                    onClick={() => openBooking("برنامج السرعة والرشاقة والتسديد")}
-                                    className="bg-[#164a2e] text-white text-xs font-bold px-3.5 py-2 rounded-xl shrink-0 mr-3 hover:bg-[#1e633e]"
-                                >
-                                    احجز
-                                </button>
+                                <button onClick={() => openBooking("برنامج السرعة والرشاقة والتسديد")} className="bg-[#164a2e] text-white text-xs font-bold px-3.5 py-2 rounded-xl shrink-0 mr-3">احجز</button>
                             </div>
 
-                            {/* برنامج 3 */}
-                            <div className="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-sm flex items-center justify-between">
+                            <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200 flex items-center justify-between">
                                 <div className="space-y-1">
                                     <span className="text-[10px] font-bold bg-amber-100 text-amber-800 px-2.5 py-0.5 rounded-full">تخصصي</span>
                                     <h4 className="font-bold text-slate-900 text-sm">تدريب حراس المرمى</h4>
-                                    <p className="text-[11px] text-slate-500">ردة الفعل، التمركز الصحيح، والتعامل مع الكرات العرضية والانفرادات.</p>
+                                    <p className="text-[11px] text-slate-500">سرعة ردة الفعل والتمركز والتعامل مع الانفرادات.</p>
                                 </div>
-                                <button 
-                                    onClick={() => openBooking("برنامج تدريب حراس المرمى")}
-                                    className="bg-[#164a2e] text-white text-xs font-bold px-3.5 py-2 rounded-xl shrink-0 mr-3 hover:bg-[#1e633e]"
-                                >
-                                    احجز
-                                </button>
+                                <button onClick={() => openBooking("برنامج تدريب حراس المرمى")} className="bg-[#164a2e] text-white text-xs font-bold px-3.5 py-2 rounded-xl shrink-0 mr-3">احجز</button>
                             </div>
                         </div>
 
-                        {/* قسم تقييمات وتطور اللاعبين */}
-                        <div className="pt-4 space-y-3">
-                            <div className="flex items-center justify-between">
-                                <h4 className="font-bold text-slate-900 text-sm">⭐ نتائج وتطور اللاعبين</h4>
-                                <span className="text-[10px] text-slate-400">ملعب الماركانا</span>
+                        {/* قسم اختيار أقرب ملعب */}
+                        <div className="pt-2 space-y-2">
+                            <h4 className="font-bold text-slate-900 text-sm">📍 مكان التدريب (أقرب ملعب لك)</h4>
+                            <div className="bg-emerald-50 border border-emerald-200 p-3 rounded-2xl space-y-2">
+                                <p className="text-[11px] text-emerald-900">يتم تنفيذ الحصص في الملعب الأقرب إليك أو الملاعب المتاحة بالتنسيق مع الكابتن جمعة:</p>
+                                <input 
+                                    type="text" 
+                                    value={clientField}
+                                    onChange={(e) => setClientField(e.target.value)}
+                                    placeholder="اكتب اسم الحي أو أقرب ملعب لك..."
+                                    className="w-full bg-white border border-emerald-300 rounded-xl p-2.5 text-xs text-slate-800 font-medium focus:outline-hidden focus:ring-2 focus:ring-emerald-500"
+                                />
                             </div>
-                            <div className="bg-white p-3.5 rounded-2xl border border-slate-200/80 shadow-sm space-y-1">
+                        </div>
+
+                        {/* نتائج وتطور اللاعبين */}
+                        <div className="pt-2 space-y-2">
+                            <h4 className="font-bold text-slate-900 text-sm">⭐ نتائج وتطور اللاعبين</h4>
+                            <div className="bg-slate-50 p-3.5 rounded-2xl border border-slate-200 space-y-1">
                                 <div className="flex justify-between items-center">
                                     <span className="text-xs font-bold text-slate-800">ولي أمر اللاعب عبد الواحد</span>
                                     <span className="text-[10px] bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full">تحكم ومراوغة</span>
@@ -211,7 +255,31 @@
                             </div>
                         </div>
 
-                        {/* أزرار الحجز المباشر بالواتساب أسفل الصفحة */}
+                        {/* نظام تقييم الخدمة التفاعلي */}
+                        <div className="bg-emerald-50 border border-emerald-200 p-4 rounded-2xl text-center space-y-2 mt-4">
+                            <h4 className="font-bold text-xs text-[#164a2e]">قيم جودة التدريب والبرنامج</h4>
+                            {!ratedSubmitted ? (
+                                <div className="space-y-2">
+                                    <div className="flex justify-center gap-1 text-xl">
+                                        {[1, 2, 3, 4, 5].map((star) => (
+                                            <button key={star} onClick={() => setRating(star)} className="focus:outline-hidden">
+                                                {star <= rating ? "⭐" : "☆"}
+                                            </button>
+                                        ))}
+                                    </div>
+                                    <button 
+                                        onClick={() => setRatedSubmitted(true)}
+                                        className="bg-[#164a2e] text-white text-[11px] font-bold px-4 py-1.5 rounded-lg"
+                                    >
+                                        إرسال التقييم
+                                    </button>
+                                </div>
+                            ) : (
+                                <p className="text-xs text-emerald-700 font-bold">شكراً لتقييمك الرائع! يسعدنا دائماً تطوير مستوى اللاعبين.</p>
+                            )}
+                        </div>
+
+                        {/* أزرار الحجز المباشر بالواتساب */}
                         <div className="bg-[#113823] text-white p-5 rounded-3xl space-y-3 text-center mt-4">
                             <h4 className="font-bold text-base text-[#c7f94b]">تواصل مباشر للحجز والاستفسار</h4>
                             <p className="text-[11px] text-emerald-100/80">اختر الفرع المناسب للتواصل الفوري مع الكابتن جمعة</p>
@@ -232,34 +300,55 @@
                         </div>
                     </section>
 
-                    {/* نافذة الحجز المنبثقة عند الضغط على أي زر حجز */}
+                    {/* نافذة الحجز المنبثقة */}
                     {showBookingModal && (
                         <div className="fixed inset-0 bg-black/70 backdrop-blur-xs z-50 flex items-center justify-center p-4">
-                            <div className="bg-white rounded-3xl p-6 max-w-sm w-full space-y-4 text-center shadow-2xl animate-fade-in">
+                            <div className="bg-white rounded-3xl p-6 max-w-sm w-full space-y-4 text-center shadow-2xl">
                                 <div className="w-12 h-12 bg-emerald-100 text-[#164a2e] rounded-full flex items-center justify-center mx-auto text-2xl">
                                     ⚽
                                 </div>
                                 <div className="space-y-1">
-                                    <h3 className="font-bold text-lg text-slate-900">تأكيد الحجز عبر الواتساب</h3>
-                                    <p className="text-xs text-slate-500">البرنامج المختار: <span className="font-bold text-[#164a2e]">{selectedProgram}</span></p>
+                                    <h3 className="font-bold text-base text-slate-900">تأكيد الحجز عبر الواتساب</h3>
+                                    <p className="text-xs text-slate-500">البرنامج: <span className="font-bold text-[#164a2e]">{selectedProgram}</span></p>
                                 </div>
+
+                                <div className="space-y-2 text-right">
+                                    <label className="text-[11px] font-bold text-slate-700 block">اختر نوع الباقة التدريبية:</label>
+                                    <select 
+                                        value={selectedPackage} 
+                                        onChange={(e) => setSelectedPackage(e.target.value)}
+                                        className="w-full bg-slate-50 border border-slate-300 rounded-xl p-2 text-xs text-slate-800 font-medium"
+                                    >
+                                        <option value="الحصة المفردة التجريبية">الحصة المفردة التجريبية</option>
+                                        <option value="باقة الـ 12 حصص الشهرية (مع قياسات Polar)">باقة الـ 12 حصص الشهرية + قياس Polar 📊</option>
+                                        <option value=" الباقة المكثفة (16 حصص متقدمة)">الباقة المكثفة16 حصص متقدمة) 🌟</option>
+                                    </select>
+                                </div>
+
+                                <div className="space-y-2 text-right">
+                                    <label className="text-[11px] font-bold text-slate-700 block">الملعب المفضل / أقرب ملعب:</label>
+                                    <input 
+                                        type="text" 
+                                        value={clientField} 
+                                        onChange={(e) => setClientField(e.target.value)}
+                                        className="w-full bg-slate-50 border border-slate-300 rounded-xl p-2 text-xs text-slate-800 font-medium"
+                                    />
+                                </div>
+
                                 <div className="space-y-2 pt-2">
                                     <button 
                                         onClick={() => handleWhatsApp('saudi')} 
                                         className="w-full bg-[#164a2e] hover:bg-[#1e633e] text-white font-bold py-3 px-4 rounded-xl text-xs transition flex items-center justify-center gap-2"
                                     >
-                                        <span>🇸🇦 تواصل واتساب - السعودية</span>
+                                        <span>🇸🇦 إرسال الطلب واتساب - السعودية</span>
                                     </button>
                                     <button 
                                         onClick={() => handleWhatsApp('egypt')} 
                                         className="w-full bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold py-3 px-4 rounded-xl text-xs transition flex items-center justify-center gap-2"
                                     >
-                                        <span>🇪🇬 تواصل واتساب - مصر</span>
-                                    </button>
-                                </div>
-                                <button 
+                                   
                                     onClick={() => setShowBookingModal(false)} 
-                                    className="text-xs text-slate-400 hover:text-slate-600 pt-2 block w-full"
+                                    className="text-xs text-slate-400 hover:text-slate-600 pt-1 block w-full"
                                 >
                                     إغلاق النافذة
                                 </button>
@@ -273,4 +362,4 @@
         ReactDOM.createRoot(document.getElementById('root')).render(<App />);
     </script>
 </body>
-</html>
+</html> 
