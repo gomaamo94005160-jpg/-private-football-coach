@@ -1,61 +1,17 @@
-{
-  "name": "private-football-app",
-  "version": "1.0.0",
-  "private": true,
-  "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "lucide-react": "^0.292.0"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  }
-}
-{ 
-  "name": "private-football-coach",
-  "version": "1.0.0",
-  "private": true,
-  "dependencies": {
-    "lucide-react": "^0.292.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-scripts": "5.0.1"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  }
-}
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تطبيق تدريب كرة القدم - خاص</title>
+    <title>تطبيق تدريب - خاص | الكابتن جمعة</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 </head>
-<body class="bg-slate-950 text-white min-h-screen p-4" dir="rtl">
+<body class="bg-slate-950 text-white min-h-screen p-4 font-sans" dir="rtl">
     <div id="root"></div>
+
     <script type="text/babel">
         function App() {
             const [isLoggedOut, setIsLoggedOut] = React.useState(false);
@@ -92,10 +48,11 @@
 
             return (
                 <div className="max-w-md mx-auto space-y-4 pb-10">
+                    {/* الترويسة العلوية مع زر تسجيل الخروج */}
                     <div className="bg-slate-900 border border-slate-800 p-4 rounded-2xl flex justify-between items-center shadow-lg">
                         <div>
-                            <h1 className="text-lg font-bold text-emerald-400">تطبيق تدريب خاص</h1>
-                            <p className="text-[11px] text-slate-400">الكابتن جمعة | ملعب الماركانا</p>
+                            <h1 className="text-lg font-bold text-emerald-400">تطبيق تدريب - خاص</h1>
+                            <p className="text-[11px] text-slate-400 mt-0.5">الكابتن جمعة | ملعب الماركانا</p>
                         </div>
                         <button 
                             onClick={handleLogout}
@@ -106,21 +63,29 @@
                         </button>
                     </div>
 
-                    <div className="bg-gradient-to-br from-emerald-900/40 to-slate-900 border border-emerald-500/30 p-6 rounded-2xl text-center space-y-4">
+                    {/* القسم الرئيسي وأزرار الحجز العمودية */}
+                    <div className="bg-gradient-to-br from-emerald-900/40 to-slate-900 border border-emerald-500/30 p-6 rounded-2xl text-center space-y-4 shadow-lg">
                         <h2 className="text-xl font-bold text-emerald-300">طوّر مستواك في كرة القدم</h2>
                         <p className="text-xs text-slate-300 leading-relaxed">
                             حصص تدريب خاصّة مصمّمة حسب عمرك ومستواك وهدفك — من التحكم بالكرة والمراوغة إلى السرعة والتسديد.
                         </p>
-                        <div className="space-y-2 pt-2">
-                            <button onClick={() => handleWhatsApp('saudi')} className="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold py-3 px-4 rounded-xl shadow-lg transition duration-200 flex items-center justify-center gap-2 text-sm">
+                        <div className="space-y-2.5 pt-2">
+                            <button 
+                                onClick={() => handleWhatsApp('saudi')} 
+                                className="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold py-3 px-4 rounded-xl shadow-lg transition duration-200 flex items-center justify-center gap-2 text-sm"
+                            >
                                 <span>🇸🇦 الحجز عبر الواتساب (السعودية)</span>
                             </button>
-                            <button onClick={() => handleWhatsApp('egypt')} className="w-full bg-slate-800 hover:bg-slate-700 text-emerald-400 border border-emerald-500/30 font-bold py-3 px-4 rounded-xl shadow-lg transition duration-200 flex items-center justify-center gap-2 text-sm">
+                            <button 
+                                onClick={() => handleWhatsApp('egypt')} 
+                                className="w-full bg-slate-800 hover:bg-slate-700 text-emerald-400 border border-emerald-500/30 font-bold py-3 px-4 rounded-xl shadow-lg transition duration-200 flex items-center justify-center gap-2 text-sm"
+                            >
                                 <span>🇪🇬 الحجز عبر الواتساب (مصر)</span>
                             </button>
                         </div>
                     </div>
 
+                    {/* الإحصائيات السريعة */}
                     <div className="grid grid-cols-3 gap-2 text-center">
                         <div className="bg-slate-900 p-3 rounded-xl border border-slate-800">
                             <span className="text-lg font-bold text-emerald-400">1:1</span>
@@ -136,7 +101,8 @@
                         </div>
                     </div>
 
-                    <div className="bg-slate-900 border border-slate-800 p-4 rounded-2xl space-y-3">
+                    {/* قسم نماذج تطور اللاعبين وآراء أولياء الأمور */}
+                    <div className="bg-slate-900 border border-slate-800 p-4 rounded-2xl space-y-3 shadow-lg">
                         <div className="flex items-center justify-between">
                             <h3 className="text-sm font-bold text-emerald-400">⭐ نتائج وتطور اللاعبين</h3>
                             <span className="text-[10px] text-slate-400">تقييمات حقيقية</span>
@@ -165,6 +131,7 @@
                 </div>
             );
         }
+
         ReactDOM.createRoot(document.getElementById('root')).render(<App />);
     </script>
 </body>
