@@ -3,67 +3,118 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تطبيق تدريب كرة القدم الخاص</title>
+    <title>تطبيق تدريب كرة القدم - خاص</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 </head>
-<body class="bg-slate-950 text-white min-h-screen p-4">
+<body class="bg-slate-950 text-white min-h-screen p-4" dir="rtl">
     <div id="root"></div>
     <script type="text/babel">
         function App() {
+            const [isLoggedOut, setIsLoggedOut] = React.useState(false);
+
             const handleWhatsApp = (country) => {
-                let phoneNumber = "";
-                if (country === 'egypt') {
-                    // ضع رقمك المصري هنا مع كود الدولة (مثلاً: 2010xxxxxxxx)
-                    phoneNumber = "201015976474"; 
-                } else if (country === 'saudi') {
-                    // ضع رقمك السعودي هنا مع كود الدولة (رقمك الحالي: 966597187037)
-                    phoneNumber = "966597187037"; 
-                }
+                const phoneNumber = country === 'egypt' ? "201015976474" : "966597187037";
                 const message = encodeURIComponent("مرحباً كابتن جمعة، أرغب في حجز حصة تدريبية والتسجيل في البرنامج.");
                 window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
             };
 
-            return (
-                <div class="max-w-md mx-auto space-y-4 pb-10">
-                    <div class="bg-slate-900 border border-slate-800 p-4 rounded-2xl flex justify-between items-center shadow-lg">
-                        <div>
-                            <h1 class="text-xl font-bold text-emerald-400">تطبيق تدريب كرة القدم الخاص</h1>
-                            <p class="text-xs text-slate-400">الكابتن جمعة | اختر ملعب </p>
+            const handleLogout = () => {
+                if (confirm("هل أنت متأكد من تسجيل الخروج من التطبيق؟")) {
+                    setIsLoggedOut(true);
+                }
+            };
+
+            if (isLoggedOut) {
+                return (
+                    <div className="max-w-md mx-auto min-h-[80vh] flex flex-col items-center justify-center text-center space-y-4">
+                        <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl w-full space-y-4 shadow-xl">
+                            <div className="text-4xl">⚽</div>
+                            <h2 className="text-lg font-bold text-emerald-400">تم تسجيل الخروج بنجاح</h2>
+                            <p className="text-xs text-slate-400">شكراً لزيارتك تطبيق التدريب الخاص مع الكابتن جمعة.</p>
+                            <button 
+                                onClick={() => setIsLoggedOut(false)} 
+                                className="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold py-2.5 px-4 rounded-xl text-sm transition"
+                            >
+                                العودة إلى التطبيق
+                            </button>
                         </div>
-                        <span class="bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-xs px-2.5 py-1 rounded-full font-medium">نشط</span>
+                    </div>
+                );
+            }
+
+            return (
+                <div className="max-w-md mx-auto space-y-4 pb-10">
+                    <div className="bg-slate-900 border border-slate-800 p-4 rounded-2xl flex justify-between items-center shadow-lg">
+                        <div>
+                            <h1 className="text-lg font-bold text-emerald-400">تطبيق تدريب خاص</h1>
+                            <p className="text-[11px] text-slate-400">الكابتن جمعة | ملعب الماركانا</p>
+                        </div>
+                        <button 
+                            onClick={handleLogout}
+                            className="bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/30 text-xs px-3 py-1.5 rounded-xl font-medium transition flex items-center gap-1"
+                        >
+                            <span>خروج</span>
+                            <span>🚪</span>
+                        </button>
                     </div>
 
-                    <div class="bg-gradient-to-br from-emerald-900/40 to-slate-900 border border-emerald-500/30 p-6 rounded-2xl text-center space-y-4">
-                        <h2 class="text-xl font-bold text-emerald-300">طوّر مستواك في كرة القدم</h2>
-                        <p class="text-xs text-slate-300 leading-relaxed">
+                    <div className="bg-gradient-to-br from-emerald-900/40 to-slate-900 border border-emerald-500/30 p-6 rounded-2xl text-center space-y-4">
+                        <h2 className="text-xl font-bold text-emerald-300">طوّر مستواك في كرة القدم</h2>
+                        <p className="text-xs text-slate-300 leading-relaxed">
                             حصص تدريب خاصّة مصمّمة حسب عمرك ومستواك وهدفك — من التحكم بالكرة والمراوغة إلى السرعة والتسديد.
                         </p>
-                        
-                        <div class="space-y-2 pt-2">
-                            <button onClick={() => handleWhatsApp('saudi')} class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold py-3 px-4 rounded-xl shadow-lg transition duration-200 flex items-center justify-center gap-2 text-sm">
+                        <div className="space-y-2 pt-2">
+                            <button onClick={() => handleWhatsApp('saudi')} className="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold py-3 px-4 rounded-xl shadow-lg transition duration-200 flex items-center justify-center gap-2 text-sm">
                                 <span>🇸🇦 الحجز عبر الواتساب (السعودية)</span>
                             </button>
-                            <button onClick={() => handleWhatsApp('egypt')} class="w-full bg-slate-800 hover:bg-slate-700 text-emerald-400 border border-emerald-500/30 font-bold py-3 px-4 rounded-xl shadow-lg transition duration-200 flex items-center justify-center gap-2 text-sm">
+                            <button onClick={() => handleWhatsApp('egypt')} className="w-full bg-slate-800 hover:bg-slate-700 text-emerald-400 border border-emerald-500/30 font-bold py-3 px-4 rounded-xl shadow-lg transition duration-200 flex items-center justify-center gap-2 text-sm">
                                 <span>🇪🇬 الحجز عبر الواتساب (مصر)</span>
                             </button>
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-3 gap-2 text-center">
-                        <div class="bg-slate-900 p-3 rounded-xl border border-slate-800">
-                            <span class="text-lg font-bold text-emerald-400">1:1</span>
-                            <p class="text-[10px] text-slate-400 mt-1">اهتمام كامل</p>
+                    <div className="grid grid-cols-3 gap-2 text-center">
+                        <div className="bg-slate-900 p-3 rounded-xl border border-slate-800">
+                            <span className="text-lg font-bold text-emerald-400">1:1</span>
+                            <p className="text-[10px] text-slate-400 mt-1">اهتمام كامل</p>
                         </div>
-                        <div class="bg-slate-900 p-3 rounded-xl border border-slate-800">
-                            <span class="text-lg font-bold text-emerald-400">6+</span>
-                            <p class="text-[10px] text-slate-400 mt-1">سنوات وما فوق</p>
+                        <div className="bg-slate-900 p-3 rounded-xl border border-slate-800">
+                            <span className="text-lg font-bold text-emerald-400">6+</span>
+                            <p className="text-[10px] text-slate-400 mt-1">سنوات وما فوق</p>
                         </div>
-                        <div class="bg-slate-900 p-3 rounded-xl border border-slate-800">
-                            <span class="text-lg font-bold text-emerald-400">60</span>
-                            <p class="text-[10px] text-slate-400 mt-1">دقيقة لكل حصة</p>
+                        <div className="bg-slate-900 p-3 rounded-xl border border-slate-800">
+                            <span className="text-lg font-bold text-emerald-400">60</span>
+                            <p className="text-[10px] text-slate-400 mt-1">دقيقة لكل حصة</p>
+                        </div>
+                    </div>
+
+                    <div className="bg-slate-900 border border-slate-800 p-4 rounded-2xl space-y-3">
+                        <div className="flex items-center justify-between">
+                            <h3 className="text-sm font-bold text-emerald-400">⭐ نتائج وتطور اللاعبين</h3>
+                            <span className="text-[10px] text-slate-400">تقييمات حقيقية</span>
+                        </div>
+                        <div className="space-y-2.5">
+                            <div className="bg-slate-950/60 p-3 rounded-xl border border-slate-800/80 space-y-1">
+                                <div className="flex justify-between items-center">
+                                    <span className="text-xs font-bold text-white">ولي أمر اللاعب عبد الواحد</span>
+                                    <span className="text-[10px] bg-emerald-500/10 text-emerald-400 px-2 py-0.5 rounded-full">تحكم ومراوغة</span>
+                                </div>
+                                <p className="text-[11px] text-slate-300 leading-relaxed">
+                                    "فرق كبير في مستوى استلام الكرة والثقة في الملعب خلال أسابيع قليلة من التدريب الفردي مع الكابتن جمعة."
+                                </p>
+                            </div>
+                            <div className="bg-slate-950/60 p-3 rounded-xl border border-slate-800/80 space-y-1">
+                                <div className="flex justify-between items-center">
+                                    <span className="text-xs font-bold text-white">لاعب فئة تحت 14 سنة</span>
+                                    <span className="text-[10px] bg-emerald-500/10 text-emerald-400 px-2 py-0.5 rounded-full">لياقة وسرعة</span>
+                                </div>
+                                <p className="text-[11px] text-slate-300 leading-relaxed">
+                                    "تمارين الرشاقة والتسديد ساعدتني أكون أساسي في فريقي وأسجل أهداف أكثر."
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
