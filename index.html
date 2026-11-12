@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>"Private Football Coach" | Coach gomaa </title>
+    <title>تطبيق تدريب - خاص | الكابتن جمعة</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
@@ -57,7 +57,7 @@
                         <div className="bg-[#184d31] border border-emerald-500/30 p-8 rounded-3xl max-w-sm w-full space-y-5 shadow-2xl">
                             <div className="text-5xl">⚽</div>
                             <h2 className="text-xl font-bold text-[#c7f94b]">تم تسجيل الخروج بنجاح</h2>
-                            <p className="text-sm text-emerald-100/80">شكراً لزيارتك "Private Football Coach" مع Coach gomaa.</p>
+                            <p className="text-sm text-emerald-100/80">شكراً لزيارتك تطبيق تدريب خاص مع الكابتن جمعة.</p>
                             <button 
                                 onClick={() => setIsLoggedOut(false)} 
                                 className="w-full bg-[#c7f94b] hover:bg-[#b5eb34] text-[#0f331f] font-bold py-3 px-6 rounded-full text-sm transition shadow-lg"
@@ -77,8 +77,8 @@
                         <div className="flex items-center gap-2">
                             <span className="text-xl">⚽</span>
                             <div>
-                                <h1 className="text-sm font-bold leading-tight""">"Private Football Coach"</h1>
-                                <p className="text-[10px] text-[#c7f94b]">Coach gomaa| تدريب فردي ومجموعات</p>
+                                <h1 className="text-sm font-bold leading-tight">تطبيق تدريب - خاص</h1>
+                                <p className="text-[10px] text-[#c7f94b]">الكابتن جمعة | تدريب فردي ومجموعات</p>
                             </div>
                         </div>
                         <div className="flex items-center gap-2">
@@ -320,8 +320,8 @@
                                         className="w-full bg-slate-50 border border-slate-300 rounded-xl p-2 text-xs text-slate-800 font-medium"
                                     >
                                         <option value="الحصة المفردة التجريبية">الحصة المفردة التجريبية</option>
-                                        <option value="باقة الـ 12 حصص الشهرية (مع قياسات Polar)">باقة الـ 12 حصص الشهرية + قياس Polar 📊</option>
-                                        <option value=" الباقة المكثفة (16 حصص متقدمة)">الباقة المكثفة16 حصص متقدمة) 🌟</option>
+                                        <option value="باقة الـ 5 حصص الشهرية (مع قياسات Polar)">باقة الـ 5 حصص الشهرية + قياس Polar 📊</option>
+                                        <option value="الباقة المكثفة (10 حصص متقدمة)">الباقة المكثفة (10 حصص متقدمة) 🌟</option>
                                     </select>
                                 </div>
 
@@ -346,7 +346,10 @@
                                         onClick={() => handleWhatsApp('egypt')} 
                                         className="w-full bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold py-3 px-4 rounded-xl text-xs transition flex items-center justify-center gap-2"
                                     >
-                                   
+                                        <span>🇪🇬 إرسال الطلب واتساب - مصر</span>
+                                    </button>
+                                </div>
+                                <button 
                                     onClick={() => setShowBookingModal(false)} 
                                     className="text-xs text-slate-400 hover:text-slate-600 pt-1 block w-full"
                                 >
@@ -362,4 +365,4 @@
         ReactDOM.createRoot(document.getElementById('root')).render(<App />);
     </script>
 </body>
-</html> 
+</html>
