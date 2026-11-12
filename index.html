@@ -1,1 +1,75 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تطبيق تدريب كرة القدم الخاص</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body class="bg-slate-950 text-white min-h-screen p-4">
+    <div id="root"></div>
+    <script type="text/babel">
+        function App() {
+            const handleWhatsApp = (country) => {
+                let phoneNumber = "";
+                if (country === 'egypt') {
+                    // ضع رقمك المصري هنا مع كود الدولة (مثلاً: 2010xxxxxxxx)
+                    phoneNumber = "201015976474"; 
+                } else if (country === 'saudi') {
+                    // ضع رقمك السعودي هنا مع كود الدولة (رقمك الحالي: 966597187037)
+                    phoneNumber = "966597187037"; 
+                }
+                const message = encodeURIComponent("مرحباً كابتن جمعة، أرغب في حجز حصة تدريبية والتسجيل في البرنامج.");
+                window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
+            };
 
+            return (
+                <div class="max-w-md mx-auto space-y-4 pb-10">
+                    <div class="bg-slate-900 border border-slate-800 p-4 rounded-2xl flex justify-between items-center shadow-lg">
+                        <div>
+                            <h1 class="text-xl font-bold text-emerald-400">تطبيق تدريب كرة القدم الخاص</h1>
+                            <p class="text-xs text-slate-400">الكابتن جمعة | اختر ملعب </p>
+                        </div>
+                        <span class="bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-xs px-2.5 py-1 rounded-full font-medium">نشط</span>
+                    </div>
+
+                    <div class="bg-gradient-to-br from-emerald-900/40 to-slate-900 border border-emerald-500/30 p-6 rounded-2xl text-center space-y-4">
+                        <h2 class="text-xl font-bold text-emerald-300">طوّر مستواك في كرة القدم</h2>
+                        <p class="text-xs text-slate-300 leading-relaxed">
+                            حصص تدريب خاصّة مصمّمة حسب عمرك ومستواك وهدفك — من التحكم بالكرة والمراوغة إلى السرعة والتسديد.
+                        </p>
+                        
+                        <div class="space-y-2 pt-2">
+                            <button onClick={() => handleWhatsApp('saudi')} class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold py-3 px-4 rounded-xl shadow-lg transition duration-200 flex items-center justify-center gap-2 text-sm">
+                                <span>🇸🇦 الحجز عبر الواتساب (السعودية)</span>
+                            </button>
+                            <button onClick={() => handleWhatsApp('egypt')} class="w-full bg-slate-800 hover:bg-slate-700 text-emerald-400 border border-emerald-500/30 font-bold py-3 px-4 rounded-xl shadow-lg transition duration-200 flex items-center justify-center gap-2 text-sm">
+                                <span>🇪🇬 الحجز عبر الواتساب (مصر)</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-3 gap-2 text-center">
+                        <div class="bg-slate-900 p-3 rounded-xl border border-slate-800">
+                            <span class="text-lg font-bold text-emerald-400">1:1</span>
+                            <p class="text-[10px] text-slate-400 mt-1">اهتمام كامل</p>
+                        </div>
+                        <div class="bg-slate-900 p-3 rounded-xl border border-slate-800">
+                            <span class="text-lg font-bold text-emerald-400">6+</span>
+                            <p class="text-[10px] text-slate-400 mt-1">سنوات وما فوق</p>
+                        </div>
+                        <div class="bg-slate-900 p-3 rounded-xl border border-slate-800">
+                            <span class="text-lg font-bold text-emerald-400">60</span>
+                            <p class="text-[10px] text-slate-400 mt-1">دقيقة لكل حصة</p>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+</body>
+</html>
